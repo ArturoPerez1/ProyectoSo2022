@@ -52,7 +52,10 @@ int main(int argc, char **argv) {
 		printf("Tiempo inicio: %lims\nTiempo final: %lims\nTiempo ejecucion: %lims\n", inicio, final, (final - inicio));
 	} else {
 		printf("Uso: timeprog <prog> <arg1> <arg2> <arg3> ... <argn>\n");
+		return 1;
 	}
+
+	return 0;
 
 }
 
