@@ -11,6 +11,7 @@ size_t get_alloc_size(int num_argumentos, char **argumentos) {
 	size_t alloc_size = 0;
 	int i;
 	for (i = 0; i < num_argumentos; i++) {
+		// Conforme vamos iterando, aumentamos el tamaño de memoria a alocar
 		alloc_size += sizeof argumentos[i]; // Este tamaño de alocacion no contiene los espacios que separan los argumentos
 	}
 
@@ -25,12 +26,16 @@ size_t get_alloc_size(int num_argumentos, char **argumentos) {
  */
 char *parse_args(int num_argumentos, char **argumentos) {
 	int i;
+	// Tamaño de memoria para el string a crear
 	size_t alloc_size = get_alloc_size(num_argumentos, argumentos);
+	// Creamos una nueva cadena
 	char *args_str = malloc(alloc_size); 
 
 	for (i = 1; i < num_argumentos; i++) {
+		// Concatenamos cada argumento a la cadena
 		strcat(args_str, argumentos[i]);
 		if (i != (num_argumentos -1)) {
+			// Separamos los argumentos por espacios, evitando colocarle al ultimo
 			strcat(args_str, " ");
 		}
 	}
@@ -41,12 +46,12 @@ char *parse_args(int num_argumentos, char **argumentos) {
 
 int main(int argc, char **argv) {
 	if (argc >= 2)  {
-		// char *programa = argv[1];
-		// printf("%lu\n", get_alloc_size(argc, argv));
+		// Obtenemos un string con la ejecucion del programa a medir
 		char *programa = parse_args(argc, argv);
-		printf("%s\n", programa);
+		// Medimos el momento de reloj antes de iniciar la ejecucion
 		clock_t inicio = clock();
-		system(programa);
+		system(programa); // Ejecutamos
+		// Medimos el tiempo posterior a la ejecucion del programa
 		clock_t final = clock();
 
 		printf("Tiempo inicio: %lims\nTiempo final: %lims\nTiempo ejecucion: %lims\n", inicio, final, (final - inicio));
