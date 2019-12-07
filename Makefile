@@ -13,3 +13,6 @@ timeprog: Timeprog/$(SRCDIR)/timeprog.c
 
 fibo: Fibo/$(SRCDIR)/fibo.c
 	$(CC) $(CFLAGS) $^ -o Fibo/$(BLDDIR)/fibo
+
+sigalarm: sigalarm/$(SRCDIR)/sigalarm.c
+	$(CC) $(CFLAGS) $^ -o sigalarm/$(BLDDIR)/sigalarm
