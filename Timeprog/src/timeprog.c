@@ -22,7 +22,7 @@ size_t get_alloc_size(int num_argumentos, char **argumentos) {
 /**
  * A partir del numero de argumentos, parsea un vector de argumentos que fueron pasados a
  * este programa, y devuelve un string con un comando con sus respectivos argumentos, listo
- * para ser usado por system()
+ * para ser usado por system()s
  */
 char *parse_args(int num_argumentos, char **argumentos) {
 	int i;
@@ -44,17 +44,24 @@ char *parse_args(int num_argumentos, char **argumentos) {
 }
 
 
+
 int main(int argc, char **argv) {
 	if (argc >= 2)  {
+		struct timespec inicio_tp, final_tp;
 		// Obtenemos un string con la ejecucion del programa a medir
 		char *programa = parse_args(argc, argv);
 		// Medimos el momento de reloj antes de iniciar la ejecucion
-		clock_t inicio = clock();
-		system(programa); // Ejecutamos
-		// Medimos el tiempo posterior a la ejecucion del programa
-		clock_t final = clock();
+		clock_t inicio_cpu = clock();
+		clock_gettime(CLOCK_REALTIME, &inicio_tp);
 
-		printf("Tiempo inicio: %lims\nTiempo final: %lims\nTiempo ejecucion: %lims\n", inicio, final, (final - inicio));
+		system(programa); // Ejecutamos
+		clock_gettime(CLOCK_REALTIME, &final_tp);
+		// Medimos el tiempo posterior a la ejecucion del programa
+		clock_t final_cpu = clock();
+		time_t inicio = inicio_tp.tv_sec;
+		time_t final = final_tp.tv_sec;
+
+		printf("Tiempo CPU: %lims\nTiempo Real: %llds\n", final_cpu - inicio_cpu, (long long)(final - inicio));
 	} else {
 		printf("Uso: timeprog <prog> <arg1> <arg2> <arg3> ... <argn>\n");
 		return 1;
