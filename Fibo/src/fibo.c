@@ -28,8 +28,7 @@ void *fibonacci_thread(void* arg) {
 	// de la memoria al salir
 	srandom(time(NULL));
 	for(int i = 0; i < 100000; i++) { // Solo calculamos 1000000 numeros para sumar.
-		// *sum += fibonacci(random() % 20);
-		*sum += fibonacci(19); 
+		*sum += fibonacci(random() % 20);
 	}
 	printf("Final hilo %ld. Suma: %lu\n", pthread_self(), *sum);
 	return (void*)sum; // Retornamos la suma como un puntero void
@@ -43,8 +42,7 @@ int main(int argc, char **argv) {
 	printf("Empezando monohilo\n");
 	for (int i = 0; i < 1000000; i++) {
 		// Durante 1 millon de iteraciones, calculamos el numero Fibonacci de un numero aleatorio entre 0 y 19, y lo agregamos a la sumatoria
-		// suma += fibonacci(random() % 20);
-		suma += fibonacci(19);
+		suma += fibonacci(random() % 20);
 	}
 
 	printf("Finalizado monohilo. Suma: %lu\n", suma); // Final de ejecucion, impresion en pantalla.
