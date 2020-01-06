@@ -16,3 +16,6 @@ fibo: Fibo/$(SRCDIR)/fibo.c
 
 sigalarm: sigalarm/$(SRCDIR)/sigalarm.c
 	$(CC) $(CFLAGS) $^ -o sigalarm/$(BLDDIR)/sigalarm
+
+nproc: nproc/$(SRCDIR)/nproc.c
+	$(CC) $(CFLAGS) $^ -o nproc/$(BLDDIR)/nproc
