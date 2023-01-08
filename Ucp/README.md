@@ -6,7 +6,9 @@ y pegado básico.
 
 Uso
 ---
-`ucp <buffsize> <src> <dest>`
+Suponiendo que ya se encuentra en la carpeta /build de /Ucp :
+1. Ejecuta usando ./ucp <buffsize> <src> <dest>
+
 
 
 
